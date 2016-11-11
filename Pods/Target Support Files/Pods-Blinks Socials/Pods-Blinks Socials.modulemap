@@ -1,0 +1,6 @@
+framework module Pods_Blinks_Socials {
+  umbrella header "Pods-Blinks Socials-umbrella.h"
+
+  export *
+  module * { export * }
+}
