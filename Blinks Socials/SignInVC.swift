@@ -13,7 +13,8 @@ import Firebase
 
 class SignInVC: UIViewController {
     
-    
+    @IBOutlet weak var emailField: FancyField!
+    @IBOutlet weak var passField: FancyField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +55,46 @@ class SignInVC: UIViewController {
         
     }
     
+    @IBAction func signInTapped(_ sender: Any) {
+        
+        if let email = emailField.text, let pass = passField.text {
+            
+            FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
+                
+                if error == nil {
+                    
+                    print("MISH: Email user authenticated with Firebase")
+                    
+                } else {
+                    
+                    FIRAuth.auth()?.createUser(withEmail: email, password: pass, completion: { (user, error) in
+                        if error != nil {
+                            
+                            print("MISH: Unable to authenticate with Firebase using email - \(error)")
+                            self.addAlert(title: "Error", message: (error?.localizedDescription)!)
+                            
+                        } else {
+                            
+                            print("MISH: Successfully authenticated with Firebase")
+                            
+                        }
+                    })
+                    
+                }
+            })
+            
+        }
+        
+    }
+    
+    
     func firebaseAuth(_ credential: FIRAuthCredential) {
         
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
                 
                 print("MISH: Unable to authenticate with Firebase - \(error)")
+                self.addAlert(title: "Error", message: (error?.localizedDescription)!)
                 
             } else {
                 
@@ -68,6 +103,13 @@ class SignInVC: UIViewController {
             }
         })
         
+    }
+    
+    func addAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
