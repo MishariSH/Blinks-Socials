@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import Firebase
 
 class SignInVC: UIViewController {
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,5 +26,48 @@ class SignInVC: UIViewController {
     }
 
 
+    @IBAction func facebookBtnTapped(_ sender: Any) {
+        
+        let facebookLogin = FBSDKLoginManager()
+        
+        facebookLogin.logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
+        
+            if error != nil {
+                
+                print("MISH: Unable to authenticate with Facebook - \(error)")
+                
+            } else if result?.isCancelled == true {
+                
+                print("MISH: User cancelled facebook authentication")
+                
+            } else {
+                
+                print("MISH: Successfully authenticated with Facebook")
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                
+                self.firebaseAuth(credential)
+                
+            }
+        
+        })
+        
+    }
+    
+    func firebaseAuth(_ credential: FIRAuthCredential) {
+        
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if error != nil {
+                
+                print("MISH: Unable to authenticate with Firebase - \(error)")
+                
+            } else {
+                
+                print("MISH: Successfully authenticated with Firebase")
+                
+            }
+        })
+        
+    }
 }
 

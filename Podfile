@@ -6,9 +6,10 @@ target 'Blinks Socials' do
   use_frameworks!
 
   # Pods for Blinks Socials
-  pod ‘Firebase/Core’
-  pod ‘Firebase/Database’
-  pod ‘Firebase/Auth’
-  pod ‘Firebase/Storage’
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'FBSDKLoginKit'
 
 end

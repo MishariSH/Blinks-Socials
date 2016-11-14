@@ -23,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		20A0B970059E37C7948AF39F /* Pods-Blinks Socials.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blinks Socials.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blinks Socials/Pods-Blinks Socials.release.xcconfig"; sourceTree = "<group>"; };
+		71413F751DD94B2E00C7E0CF /* Blinks Socials.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Blinks Socials.entitlements"; sourceTree = "<group>"; };
 		71896D071DD634810047DA7B /* Blinks Socials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blinks Socials.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71896D0A1DD634810047DA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71896D0C1DD634810047DA7B /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		71896D091DD634810047DA7B /* Blinks Socials */ = {
 			isa = PBXGroup;
 			children = (
+				71413F751DD94B2E00C7E0CF /* Blinks Socials.entitlements */,
 				71896D231DD8FCFD0047DA7B /* Util */,
 				71896D201DD6381E0047DA7B /* Controller */,
 				71896D1F1DD638190047DA7B /* View */,
@@ -173,7 +175,13 @@
 				TargetAttributes = {
 					71896D061DD634810047DA7B = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8HNM4CZ4B3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -390,6 +398,8 @@
 			baseConfigurationReference = A87B8753125A76F8636DD025 /* Pods-Blinks Socials.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Blinks Socials/Blinks Socials.entitlements";
+				DEVELOPMENT_TEAM = 8HNM4CZ4B3;
 				INFOPLIST_FILE = "Blinks Socials/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.app.Blinks-Socials";
@@ -403,6 +413,8 @@
 			baseConfigurationReference = 20A0B970059E37C7948AF39F /* Pods-Blinks Socials.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Blinks Socials/Blinks Socials.entitlements";
+				DEVELOPMENT_TEAM = 8HNM4CZ4B3;
 				INFOPLIST_FILE = "Blinks Socials/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.app.Blinks-Socials";
