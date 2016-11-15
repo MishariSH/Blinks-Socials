@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import SwiftKeychainWrapper
 
 class SignInVC: UIViewController {
     
@@ -19,6 +20,16 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            print("MISH: user saved in keychain library, performing segue")
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +75,9 @@ class SignInVC: UIViewController {
                 if error == nil {
                     
                     print("MISH: Email user authenticated with Firebase")
+                    if let user = user {
+                        self.completeSignIn(id: user.uid)
+                    }
                     
                 } else {
                     
@@ -76,6 +90,9 @@ class SignInVC: UIViewController {
                         } else {
                             
                             print("MISH: Successfully authenticated with Firebase")
+                            if let user = user {
+                                self.completeSignIn(id: user.uid)
+                            }
                             
                         }
                     })
@@ -100,6 +117,11 @@ class SignInVC: UIViewController {
                 
                 print("MISH: Successfully authenticated with Firebase")
                 
+                if let user = user {
+                    
+                    self.completeSignIn(id: user.uid)
+                    
+                }
             }
         })
         
@@ -110,6 +132,12 @@ class SignInVC: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func completeSignIn(id: String) {
+        let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("MISH: Data saved in keychain \(keychainResult)")
+        performSegue(withIdentifier: "goToFeed", sender: nil)
     }
 }
 

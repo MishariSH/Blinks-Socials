@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71413F771DDAB50300C7E0CF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71413F761DDAB50300C7E0CF /* FeedVC.swift */; };
 		71896D0B1DD634810047DA7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71896D0A1DD634810047DA7B /* AppDelegate.swift */; };
 		71896D0D1DD634810047DA7B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71896D0C1DD634810047DA7B /* SignInVC.swift */; };
 		71896D101DD634810047DA7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71896D0E1DD634810047DA7B /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		20A0B970059E37C7948AF39F /* Pods-Blinks Socials.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blinks Socials.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blinks Socials/Pods-Blinks Socials.release.xcconfig"; sourceTree = "<group>"; };
 		71413F751DD94B2E00C7E0CF /* Blinks Socials.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Blinks Socials.entitlements"; sourceTree = "<group>"; };
+		71413F761DDAB50300C7E0CF /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		71896D071DD634810047DA7B /* Blinks Socials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blinks Socials.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71896D0A1DD634810047DA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71896D0C1DD634810047DA7B /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				71896D0C1DD634810047DA7B /* SignInVC.swift */,
+				71413F761DDAB50300C7E0CF /* FeedVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				71896D0D1DD634810047DA7B /* SignInVC.swift in Sources */,
 				71896D271DD8FF1F0047DA7B /* RoundButton.swift in Sources */,
 				71896D2B1DD902450047DA7B /* FancyButton.swift in Sources */,
+				71413F771DDAB50300C7E0CF /* FeedVC.swift in Sources */,
 				71896D0B1DD634810047DA7B /* AppDelegate.swift in Sources */,
 				71896D221DD8FC600047DA7B /* FancyView.swift in Sources */,
 				71896D251DD8FD2D0047DA7B /* Constants.swift in Sources */,
