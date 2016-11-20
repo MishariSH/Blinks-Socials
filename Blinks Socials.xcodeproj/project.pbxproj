@@ -10,6 +10,7 @@
 		71413F771DDAB50300C7E0CF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71413F761DDAB50300C7E0CF /* FeedVC.swift */; };
 		71413F791DDC1CC400C7E0CF /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71413F781DDC1CC400C7E0CF /* CircleImageView.swift */; };
 		71413F7B1DDD588900C7E0CF /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71413F7A1DDD588900C7E0CF /* PostCell.swift */; };
+		71571DD91DE1FF4500604AE9 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71571DD81DE1FF4500604AE9 /* DataService.swift */; };
 		71896D0B1DD634810047DA7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71896D0A1DD634810047DA7B /* AppDelegate.swift */; };
 		71896D0D1DD634810047DA7B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71896D0C1DD634810047DA7B /* SignInVC.swift */; };
 		71896D101DD634810047DA7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71896D0E1DD634810047DA7B /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		71413F761DDAB50300C7E0CF /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		71413F781DDC1CC400C7E0CF /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		71413F7A1DDD588900C7E0CF /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		71571DD81DE1FF4500604AE9 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		71896D071DD634810047DA7B /* Blinks Socials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blinks Socials.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71896D0A1DD634810047DA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71896D0C1DD634810047DA7B /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		71571DD71DE1FF2100604AE9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				71571DD81DE1FF4500604AE9 /* DataService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		71896CFE1DD634810047DA7B = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +98,7 @@
 		71896D091DD634810047DA7B /* Blinks Socials */ = {
 			isa = PBXGroup;
 			children = (
+				71571DD71DE1FF2100604AE9 /* Services */,
 				71413F751DD94B2E00C7E0CF /* Blinks Socials.entitlements */,
 				71896D231DD8FCFD0047DA7B /* Util */,
 				71896D201DD6381E0047DA7B /* Controller */,
@@ -284,6 +295,7 @@
 				71896D0D1DD634810047DA7B /* SignInVC.swift in Sources */,
 				71896D271DD8FF1F0047DA7B /* RoundButton.swift in Sources */,
 				71896D2B1DD902450047DA7B /* FancyButton.swift in Sources */,
+				71571DD91DE1FF4500604AE9 /* DataService.swift in Sources */,
 				71413F771DDAB50300C7E0CF /* FeedVC.swift in Sources */,
 				71896D0B1DD634810047DA7B /* AppDelegate.swift in Sources */,
 				71896D221DD8FC600047DA7B /* FancyView.swift in Sources */,
