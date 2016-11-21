@@ -12,6 +12,8 @@ import Firebase
 
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    var posts = [Post]()
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func signOutTapped(_ sender: Any) {
@@ -27,10 +29,15 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let post = posts[indexPath.row]
+        
+        print("MISH: \(post.caption)")
+            
         return tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
     }
     
@@ -41,9 +48,25 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
             
-            print(snapshot.value)
-            
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshot {
+                    
+                    print("SNAP \(snap)")
+                    if let postDict = snap.value as? Dictionary<String, Any> {
+                        let key = snap.key
+                        let post = Post(postKey: key, postData: postDict)
+                        self.posts.append(post)
+                        
+                    }
+                }
+            }
+            self.tableView.reloadData()
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
