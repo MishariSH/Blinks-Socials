@@ -36,9 +36,17 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let post = posts[indexPath.row]
         
-        print("MISH: \(post.caption)")
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell {
             
-        return tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
+            cell.configureCell(post: post)
+            return cell
+            
+        } else {
+            
+            return PostCell()
+            
+        }
+        
     }
     
     override func viewDidLoad() {
