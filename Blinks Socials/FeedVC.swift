@@ -13,6 +13,7 @@ import Firebase
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var posts = [Post]()
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imagePicker: UIImagePickerController!
     
     @IBOutlet weak var tableView: UITableView!
@@ -41,8 +42,17 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCell {
             
-            cell.configureCell(post: post)
-            return cell
+            if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
+                print("MISH: Getting image from cache")
+                cell.configureCell(post: post, img: img)
+                return cell
+            } else {
+                print("MISH: Getting image from Firebase storage")
+                cell.configureCell(post: post)
+                return cell
+            }
+            
+            
             
         } else {
             
