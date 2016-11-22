@@ -15,10 +15,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     var posts = [Post]()
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imagePicker: UIImagePickerController!
+    var imageSelected = false
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var imageAdd: CircleImageView!
+    
+    @IBOutlet weak var captionField: FancyField!
+    
     
     @IBAction func signOutTapped(_ sender: Any) {
         let keychainResult = KeychainWrapper.standard.removeObject(forKey: KEY_UID)
@@ -65,6 +69,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageAdd.image = image
+            imageSelected = true
         } else {
             print("MISH: A valid image wasn't selected")
         }
@@ -74,6 +79,42 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     @IBAction func addImageTapped(_ sender: Any) {
         
         present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    @IBAction func postButtonTapped(_ sender: Any) {
+        
+        guard let caption = captionField.text, caption != "" else {
+            self.showAlert(message: "Please add the caption to your photo")
+            print("MISH: Caption must be entered")
+            return
+        }
+        guard let img = imageAdd.image, imageSelected else {
+            self.showAlert(message: "Please select an image!")
+            print("MISH: An image must be selected")
+            return
+        }
+        
+        if let imgData = UIImageJPEGRepresentation(img, 0.2) {
+            
+            let imgUid = NSUUID().uuidString
+            let metaData = FIRStorageMetadata()
+            metaData.contentType = "image/jpeg"
+            DataService.ds.REF_POST_IMAGES.child(imgUid).put(imgData, metadata: metaData, completion: { (metaData, error) in
+                
+                if error != nil {
+                    print("MISH: Unable to upload image to Firebase storage")
+                } else {
+                    print("MISH: Successfully uploaded image to Firebase storage")
+                    let downloadUrl = metaData?.downloadURL()?.absoluteString
+                    print("MISH: Download URL is: \(downloadUrl)")
+                }
+                
+            })
+            
+            
+        }
         
     }
     
@@ -111,6 +152,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func showAlert(message: String) {
+        
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
 
