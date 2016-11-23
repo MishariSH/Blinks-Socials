@@ -22,7 +22,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     @IBOutlet weak var imageAdd: CircleImageView!
     
     @IBOutlet weak var captionField: FancyField!
-    
+
     
     @IBAction func signOutTapped(_ sender: Any) {
         let keychainResult = KeychainWrapper.standard.removeObject(forKey: KEY_UID)
@@ -49,15 +49,11 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
                 print("MISH: Getting image from cache")
                 cell.configureCell(post: post, img: img)
-                return cell
             } else {
                 print("MISH: Getting image from Firebase storage")
                 cell.configureCell(post: post)
-                return cell
             }
-            
-            
-            
+            return cell
         } else {
             
             return PostCell()
