@@ -107,8 +107,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                     print("MISH: Unable to upload image to Firebase storage")
                 } else {
                     print("MISH: Successfully uploaded image to Firebase storage")
-                    let downloadUrl = metaData?.downloadURL()?.absoluteString
-                    print("MISH: Download URL is: \(downloadUrl)")
+                    if let downloadUrl = metaData?.downloadURL()?.absoluteString {
+                        print("MISH: Download URL is: \(downloadUrl)")
+                        self.postToFirebase(imageUrl: downloadUrl)
+                    }
                 }
                 
             })
@@ -118,16 +120,34 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
     }
     
+    func postToFirebase(imageUrl: String) {
+        
+        let post: Dictionary<String, Any> = [
+        "caption":captionField.text!,
+        "imageUrl":imageUrl,
+        "likes":0
+        ]
+        
+        DataService.ds.createFirebaseDBPost(postData: post)
+        
+        captionField.text = ""
+        imageSelected = false
+        imageAdd.image = UIImage(named: "add-image")
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("MISH: in FeedVC.viewDidLoad")
         tableView.delegate = self
         tableView.dataSource = self
         imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
-            
+            self.posts = []
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshot {
                     

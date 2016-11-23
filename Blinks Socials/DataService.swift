@@ -45,10 +45,15 @@ class DataService {
         REF_USERS.child(uid).updateChildValues(userData)
     }
     
-    func createFirebaseDBPost(postData: Dictionary<String, String>) {
-        REF_POSTS.childByAutoId().updateChildValues(postData, withCompletionBlock: { (error, ref) in
+    func createFirebaseDBPost(postData: Dictionary<String, Any>) {
+        REF_POSTS.childByAutoId().setValue(postData, withCompletionBlock: { (error, ref) in
             if error == nil {
-                self.REF_USERS.child("posts").updateChildValues([ref.key : true])
+                if let uid = FIRAuth.auth()?.currentUser?.uid {
+                    
+                    self.REF_USERS.child(uid).child("posts").updateChildValues([ref.key : true])
+                    
+                }
+                
             }
         })
     }
